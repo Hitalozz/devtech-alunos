@@ -2,71 +2,495 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevTech Academy</title>
-    <script src="script.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>DevTech Academy | Alunos</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.9/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
 </head>
-<body>
-    <h1>Gerenciamento de alunos</h1>
 
-    <form id="formulario-aluno">
-        <div>
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" required>
+<body style="background-color: #004643; color: #F0EDE5;">
+    <a
+        href="#conteudo"
+        class="visually-hidden-focusable btn btn-light"
+    >
+        Ir para o conteúdo
+    </a>
+
+    <!-- CABEÇALHO -->
+    <header>
+        <nav
+            class="navbar navbar-expand-md"
+            data-bs-theme="light"
+            aria-label="Navegação principal"
+            style="background-color: #F0EDE5;"
+        >
+            <div class="container py-2">
+                <a
+                    class="navbar-brand d-flex align-items-center gap-3"
+                    href="#"
+                    style="color: #004643;"
+                >
+                    <!-- Ajuste o caminho se o logo estiver em outra pasta. -->
+                    <img
+                        src="puc-goias.svg"
+                        alt="PUC Goiás"
+                        width="100"
+                        class="img-fluid"
+                    >
+
+                    <span class="fw-bold">
+                        DevTech Academy
+                    </span>
+                </a>
+
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#menuPrincipal"
+                    aria-controls="menuPrincipal"
+                    aria-expanded="false"
+                    aria-label="Abrir menu"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main id="conteudo" class="container py-4 py-lg-5">
+        <!-- APRESENTAÇÃO -->
+        <section class="mb-4" aria-labelledby="titulo-pagina">
+            <span
+                class="badge rounded-pill mb-3"
+                style="background-color: #F0EDE5; color: #004643;"
+            >
+                Gestão acadêmica
+            </span>
+
+            <h1 id="titulo-pagina" class="display-6 fw-bold">
+                Gerenciamento de alunos
+            </h1>
+
+            <p>
+                Organize os cadastros e acompanhe o desempenho da turma.
+            </p>
+        </section>
+
+        <!-- RESUMO -->
+        <section class="row g-3 mb-4" aria-label="Resumo da turma">
+            <div class="col-12 col-md-4">
+                <div
+                    class="card border-0 shadow-sm rounded-4 h-100"
+                    style="background-color: #F0EDE5; color: #004643;"
+                >
+                    <div class="card-body p-4">
+                        <h2 class="h6">Alunos cadastrados</h2>
+
+                        <p id="total-alunos" class="display-5 fw-bold mb-0">
+                            —
+                        </p>
+
+                        <small>Total de registros</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+                <div
+                    class="card border-0 shadow-sm rounded-4 h-100"
+                    style="background-color: #F0EDE5; color: #004643;"
+                >
+                    <div class="card-body p-4">
+                        <h2 class="h6">Alunos aprovados</h2>
+
+                        <p id="total-aprovados" class="display-5 fw-bold mb-0">
+                            —
+                        </p>
+
+                        <small>Nota final a partir de 7</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+                <div
+                    class="card border-0 shadow-sm rounded-4 h-100"
+                    style="background-color: #F0EDE5; color: #004643;"
+                >
+                    <div class="card-body p-4">
+                        <h2 class="h6">Média da turma</h2>
+
+                        <p id="media-turma" class="display-5 fw-bold mb-0">
+                            —
+                        </p>
+
+                        <small>Notas de 0 a 10</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MENSAGENS -->
+        <div
+            id="mensagem-sistema"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+        ></div>
+
+        <div class="row g-4 align-items-start">
+            <!-- FORMULÁRIO -->
+            <section
+                id="cadastro"
+                class="col-12 col-lg-4"
+                aria-labelledby="titulo-formulario"
+            >
+                <div
+                    class="card border-0 shadow-sm rounded-4"
+                    style="background-color: #F0EDE5; color: #004643;"
+                >
+                    <div class="card-body p-4">
+                        <h2 id="titulo-formulario" class="h4 fw-bold">
+                            Cadastrar aluno
+                        </h2>
+
+                        <p class="small mb-4">
+                            Todos os campos são obrigatórios.
+                        </p>
+
+                        <form id="formulario-aluno">
+                            <div class="mb-3">
+                                <label for="nome" class="form-label fw-semibold">
+                                    Nome completo
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="nome"
+                                    name="nome"
+                                    class="form-control"
+                                    placeholder="Ex.: Ana Souza"
+                                    autocomplete="name"
+                                    style="color: #004643;"
+                                    required
+                                >
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="idade" class="form-label fw-semibold">
+                                    Idade
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="idade"
+                                    name="idade"
+                                    class="form-control"
+                                    placeholder="Ex.: 20"
+                                    min="1"
+                                    step="1"
+                                    style="color: #004643;"
+                                    required
+                                >
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="curso" class="form-label fw-semibold">
+                                    Curso
+                                </label>
+
+                                <select
+                                    id="curso"
+                                    name="curso"
+                                    class="form-select"
+                                    style="color: #004643;"
+                                    required
+                                >
+                                    <option value="">Selecione um curso</option>
+                                    <option value="JavaScript">JavaScript</option>
+                                    <option value="Python">Python</option>
+                                    <option value="Java">Java</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-4">
+                                <label
+                                    for="notaFinal"
+                                    class="form-label fw-semibold"
+                                >
+                                    Nota final
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="notaFinal"
+                                    name="notaFinal"
+                                    class="form-control"
+                                    placeholder="Ex.: 8,5"
+                                    min="0"
+                                    max="10"
+                                    step="0.1"
+                                    aria-describedby="ajuda-nota"
+                                    style="color: #004643;"
+                                    required
+                                >
+
+                                <div
+                                    id="ajuda-nota"
+                                    class="form-text"
+                                    style="color: #004643;"
+                                >
+                                    Informe uma nota entre 0 e 10.
+                                </div>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button
+                                    type="submit"
+                                    id="botao-salvar"
+                                    class="btn fw-semibold py-2"
+                                    style="
+                                        --bs-btn-color: #F0EDE5;
+                                        --bs-btn-bg: #004643;
+                                        --bs-btn-border-color: #004643;
+                                        --bs-btn-hover-color: #F0EDE5;
+                                        --bs-btn-hover-bg: #003532;
+                                        --bs-btn-hover-border-color: #003532;
+                                        --bs-btn-active-color: #F0EDE5;
+                                        --bs-btn-active-bg: #002B29;
+                                        --bs-btn-active-border-color: #002B29;
+                                        --bs-btn-focus-shadow-rgb: 0, 70, 67;
+                                    "
+                                >
+                                    Cadastrar
+                                </button>
+
+                                <button
+                                    type="button"
+                                    id="botao-cancelar"
+                                    class="btn btn-outline-dark"
+                                    hidden
+                                >
+                                    Cancelar edição
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LISTAGEM -->
+            <section
+                id="alunos"
+                class="col-12 col-lg-8"
+                aria-labelledby="titulo-alunos"
+            >
+                <div
+                    class="card border-0 shadow-sm rounded-4"
+                    style="background-color: #F0EDE5; color: #004643;"
+                >
+                    <div class="card-body p-4">
+                        <h2 id="titulo-alunos" class="h4 fw-bold">
+                            Alunos cadastrados
+                        </h2>
+
+                        <p class="small mb-4">
+                            Consulte, edite ou exclua os registros.
+                        </p>
+
+                        <div class="row g-3 mb-4">
+                            <div class="col-12 col-md-7">
+                                <label
+                                    for="busca-aluno"
+                                    class="form-label fw-semibold"
+                                >
+                                    Buscar aluno
+                                </label>
+
+                                <input
+                                    type="search"
+                                    id="busca-aluno"
+                                    class="form-control"
+                                    placeholder="Digite um nome"
+                                    style="color: #004643;"
+                                >
+                            </div>
+
+                            <div class="col-12 col-md-5">
+                                <label
+                                    for="filtro-curso"
+                                    class="form-label fw-semibold"
+                                >
+                                    Filtrar por curso
+                                </label>
+
+                                <select
+                                    id="filtro-curso"
+                                    class="form-select"
+                                    style="color: #004643;"
+                                >
+                                    <option value="">Todos os cursos</option>
+                                    <option value="JavaScript">JavaScript</option>
+                                    <option value="Python">Python</option>
+                                    <option value="Java">Java</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div
+                            class="table-responsive"
+                            role="region"
+                            aria-label="Tabela de alunos"
+                            tabindex="0"
+                        >
+                            <table
+                                class="table table-striped table-hover align-middle"
+                                style="
+                                    --bs-table-color: #004643;
+                                    --bs-table-bg: #F0EDE5;
+                                    --bs-table-border-color: #BCCAC4;
+                                    --bs-table-striped-color: #004643;
+                                    --bs-table-striped-bg: #E3E7DF;
+                                    --bs-table-hover-color: #004643;
+                                    --bs-table-hover-bg: #D8E2D8;
+                                "
+                            >
+                                <caption class="small" style="color: #004643;">
+                                    Registros e ações disponíveis para cada aluno.
+                                </caption>
+
+                                <thead
+                                    style="
+                                        --bs-table-color: #F0EDE5;
+                                        --bs-table-bg: #004643;
+                                    "
+                                >
+                                    <tr>
+                                        <th scope="col">Nome</th>
+                                        <th scope="col">Idade</th>
+                                        <th scope="col">Curso</th>
+                                        <th scope="col" class="text-nowrap">
+                                            Nota final
+                                        </th>
+                                        <th scope="col">Ações</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="tabela-alunos"></tbody>
+                            </table>
+                        </div>
+
+                        <p
+                            id="contador-resultados"
+                            class="small mb-0"
+                            role="status"
+                        ></p>
+                    </div>
+                </div>
+            </section>
         </div>
 
-        <div>
-            <label for="idade">Idade:</label>
-            <input type="number" id="idade" min="1" step="1" required>
+        <!-- RELATÓRIOS -->
+        <section
+            id="relatorios"
+            class="card border-0 shadow-sm rounded-4 mt-4"
+            aria-labelledby="titulo-relatorios"
+            style="background-color: #F0EDE5; color: #004643;"
+        >
+            <div class="card-body p-4">
+                <h2 id="titulo-relatorios" class="h4 fw-bold">
+                    Relatórios da turma
+                </h2>
+
+                <p>
+                    As análises consideram todos os alunos cadastrados.
+                </p>
+
+                <div
+                    class="d-flex flex-wrap gap-2 mb-4"
+                    role="group"
+                    aria-label="Tipos de relatório"
+                >
+                    <button
+                        type="button"
+                        id="btn-aprovados"
+                        class="btn btn-outline-dark"
+                    >
+                        Alunos aprovados
+                    </button>
+
+                    <button
+                        type="button"
+                        id="btn-media-notas"
+                        class="btn btn-outline-dark"
+                    >
+                        Média das notas
+                    </button>
+
+                    <button
+                        type="button"
+                        id="btn-media-idades"
+                        class="btn btn-outline-dark"
+                    >
+                        Média das idades
+                    </button>
+
+                    <button
+                        type="button"
+                        id="btn-nomes"
+                        class="btn btn-outline-dark"
+                    >
+                        Nomes em ordem alfabética
+                    </button>
+
+                    <button
+                        type="button"
+                        id="btn-cursos"
+                        class="btn btn-outline-dark"
+                    >
+                        Quantidade por curso
+                    </button>
+                </div>
+
+                <pre
+                    id="resultado-relatorio"
+                    class="border rounded-3 p-3 p-md-4 mb-0"
+                    style="
+                        background-color: #E3E7DF;
+                        color: #004643;
+                        font-family: inherit;
+                        white-space: pre-wrap;
+                        overflow-wrap: anywhere;
+                    "
+                    aria-live="polite"
+                    aria-atomic="true"
+                >Selecione um relatório para visualizar os resultados.</pre>
+            </div>
+        </section>
+
+        <p class="small mt-4 mb-0">
+            Os dados ficam nesta sessão e são apagados ao atualizar
+            ou fechar a página.
+        </p>
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer
+        class="py-4"
+        style="background-color: #F0EDE5; color: #004643;"
+    >
+        <div class="container d-flex flex-wrap justify-content-between gap-2">
+            <span class="fw-semibold">Hitalo Augusto Lourenço Guedes</span>
+            <small>Gestão de alunos</small>
         </div>
+    </footer>
 
-        <div>
-            <label for="curso">Curso:</label>
-            <select id="curso" required>
-
-                <option value="">Selecione um curso</option>
-
-                <option value="JavaScript">JavaScript</option>
-
-                <option value="Python">Python</option>
-
-                <option value="Java">Java</option>
-
-            </select>
-        </div>
-
-        <div>
-            <label for="notaFinal">Nota final:</label>
-            <input type="number" id="notaFinal"
-                   min="0" max="10" step="0.1" required>
-        </div>
-
-        <button type="submit" id="botao-salvar">Cadastrar</button>
-    </form>
-
-    <h2>Alunos cadastrados</h2>
-
-    <table border="1" cellpadding="8" cellspacing="0">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Idade</th>
-                <th>Curso</th>
-                <th>Nota final</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody id="tabela-alunos"></tbody>
-    </table>
-
-    <h2>Relatórios</h2>
-
-    <button type="button" id="btn-aprovados">Alunos aprovados</button>
-    <button type="button" id="btn-media-notas">Média das notas</button>
-    <button type="button" id="btn-media-idades">Média das idades</button>
-    <button type="button" id="btn-nomes">Nomes em ordem alfabética</button>
-    <button type="button" id="btn-cursos">Quantidade por curso</button>
-
-    <pre id="resultado-relatorio" aria-live="polite"></pre>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.9/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
